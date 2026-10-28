@@ -4,7 +4,7 @@ title: '#4471 · three problems, not one'
 owner: Axeldeblen
 status: open
 reviewed: 2026-10-29
-signature: Axeldeblen
+signature: 'v1.eyJzdWIiOiIyMzk1IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMzA0MTcsImV4cCI6MTc5MzMxNjgxN30.wcQaKfctXSHnE9Sd726RsK7yAuSPlu7xaOLoRTOZqTc'
 ---
 
 <script>
