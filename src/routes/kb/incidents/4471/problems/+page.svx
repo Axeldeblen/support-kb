@@ -35,14 +35,15 @@ Not one issue. Each problem below has its own ticket. Fixing the parser leaves t
 ## How each report was placed
 
 - **One report, one id.** The export pages overlap, so some reports come twice.
-- **`one-day`** — the desk read it as a one-day move (`desk-notes.json`). Nothing is swapped: the
-  same meeting lands a day apart for people in different places. Neither other fix touches it.
 - **`hint`** — it came through the booking form of a booking-v3 tenant. The form tells people to
   type month first and then reads the date day first.
 - **`parser`** — every other report from a day-first tenant: the shared parser swaps day and month.
+- **`one-day`** — the desk read it as a one-day move (`desk-notes.json`). Nothing is swapped: the
+  same meeting lands a day apart for people in different places. Neither other fix touches it.
+  As on [#4471](/kb/incidents/4471), these stay counted where they're filed, and are counted here too.
 
 The cause comes from the tenant (`causes.ts`, `locales.ts`), never from the intake tag. Intake
-guesses from the reporter's browser; "intake tagged otherwise" counts where it guessed wrong.
+guesses from the reporter's browser, and often guesses wrong.
 
 ## Why the subject line hid them
 
