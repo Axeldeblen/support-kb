@@ -14,18 +14,20 @@ signature: Axeldeblen
 
   const ISSUES = 'https://github.com/Axeldeblen/support-kb/issues';
   const problems = [
-    { key: 'parser', what: 'The shared parser reads day-first dates month first.', issue: `${ISSUES}/1` },
-    { key: 'hint', what: 'The booking-v3 form hint says MM/DD/YYYY; the form reads day first.', issue: `${ISSUES}/2` },
-    { key: 'one-day', what: 'Dates move by one day across time zones.', issue: `${ISSUES}/3` },
+    { key: 'parser', what: 'The shared parser reads day-first dates month first.', issue: `${ISSUES}/1`, state: 'fixed' },
+    { key: 'hint', what: 'The booking-v3 form hint says MM/DD/YYYY; the form reads day first.', issue: `${ISSUES}/2`, state: "won't fix" },
+    { key: 'one-day', what: 'Dates move by one day across time zones.', issue: `${ISSUES}/3`, state: 'open' },
   ];
 </script>
 
-[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. The reports say otherwise.
-Read by what they show, not by subject line or intake tag, they are three problems. The queued
-parser fix closes only the first.
+[#4471](/kb/incidents/4471) was marked known: one issue, one fix queued. The reports say otherwise.
+Read by what they show, not by subject line or intake tag, they are three problems.
+
+Engineering closed #4471 on 5 October: the parser is fixed (`fix(dates): parse dd/mm for eu locales`)
+and the booking-v3 form is retired, so its hint won't be fixed. Neither touches the third problem.
 
 <Callout kind="warn">
-Not one issue. Each problem below has its own ticket. Fixing the parser leaves the other two open.
+#4471 is closed, but not done. Reports of dates that move by one day are still open, with no fix.
 </Callout>
 
 ## The problems

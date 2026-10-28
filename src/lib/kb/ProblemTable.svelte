@@ -7,7 +7,7 @@
   // One row per problem, counted the desk's way (CauseTable): by cause, from the tenant. Reports the
   // desk read as a one-day move (desk-notes.json) stay counted where they're filed and get their own
   // row too: nothing in them is swapped, so they are a problem of their own.
-  type Problem = { key: string; what: string; issue: string };
+  type Problem = { key: string; what: string; issue: string; state: string };
   let { ticket, problems }: { ticket: number; problems: Problem[] } = $props();
 
   const merged = $derived(uniqueById(reports as Report[]).filter((r) => r.mergedInto === ticket));
@@ -37,7 +37,7 @@
 
 <table>
   <thead>
-    <tr><th>problem</th><th>reports</th><th>tenants</th><th>seen</th><th>ticket</th></tr>
+    <tr><th>problem</th><th>reports</th><th>tenants</th><th>seen</th><th>ticket</th><th>state</th></tr>
   </thead>
   <tbody>
     {#each rows as r (r.key)}
@@ -47,6 +47,7 @@
         <td>{r.tenants}</td>
         <td>{r.seen}</td>
         <td>{#if r.p}<a href={r.p.issue}>{r.p.issue.replace(/^.*\/issues\//, '#')}</a>{:else}no ticket yet{/if}</td>
+        <td class:open={r.p?.state === 'open'}>{r.p?.state ?? '—'}</td>
       </tr>
     {/each}
   </tbody>
@@ -63,4 +64,5 @@
   .what { color: var(--muted); font-size: 0.85em; }
   .note { color: var(--muted); font-size: 0.85em; }
   .wrong td { background: var(--warn-bg); }
+  .open { color: var(--warn); font-weight: 600; }
 </style>
