@@ -1,0 +1,53 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: Axeldeblen
+status: open
+reviewed: 2026-10-29
+signature: Axeldeblen
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const ISSUES = 'https://github.com/Axeldeblen/support-kb/issues';
+  const problems = [
+    { key: 'parser', what: 'The shared parser reads day-first dates month first.', issue: `${ISSUES}/1` },
+    { key: 'hint', what: 'The booking-v3 form hint says MM/DD/YYYY; the form reads day first.', issue: `${ISSUES}/2` },
+    { key: 'one-day', what: 'Dates move by one day across time zones.', issue: `${ISSUES}/3` },
+  ];
+</script>
+
+[#4471](/kb/incidents/4471) is marked known: one issue, one fix queued. The reports say otherwise.
+Read by what they show, not by subject line or intake tag, they are three problems. The queued
+parser fix closes only the first.
+
+<Callout kind="warn">
+Not one issue. Each problem below has its own ticket. Fixing the parser leaves the other two open.
+</Callout>
+
+## The problems
+
+<ProblemTable ticket={4471} {problems} />
+
+## How each report was placed
+
+- **One report, one id.** The export pages overlap, so some reports come twice.
+- **`one-day`** — the desk read it as a one-day move (`desk-notes.json`). Nothing is swapped: the
+  same meeting lands a day apart for people in different places. Neither other fix touches it.
+- **`hint`** — it came through the booking form of a booking-v3 tenant. The form tells people to
+  type month first and then reads the date day first.
+- **`parser`** — every other report from a day-first tenant: the shared parser swaps day and month.
+
+The cause comes from the tenant (`causes.ts`, `locales.ts`), never from the intake tag. Intake
+guesses from the reporter's browser; "intake tagged otherwise" counts where it guessed wrong.
+
+## Why the subject line hid them
+
+Triage merges on subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)). The subject
+does not tell these problems apart: "Wrong day on the invite" is the subject of reports in all three.
+Try it in [triage](/kb/triage/dedupe): same subject, different tenant or channel, different cause.
+
+<RenderStamp {signature} />
